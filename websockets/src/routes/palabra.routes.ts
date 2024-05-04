@@ -29,4 +29,9 @@ Router.get(
     "/palabra/:id",
     palabraController.delete
   )
+
+  Router.get(
+    "/palabras",
+    palabraController.getAll
+  );
   export { Router as palabraRouter };

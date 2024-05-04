@@ -1,10 +1,10 @@
-import { SongRepository } from "../repositories/song.repository";
+import { PalabraRepository } from "../repositories/palabra.repository";
 
 const express = require('express');
 const router = express.Router();
 module.exports = (expressWs) => {
     
-    const songRepository = new SongRepository();
+    const palabraRepository = new PalabraRepository();
     expressWs.applyTo(router);
 
     const rooms = {};
@@ -37,12 +37,12 @@ module.exports = (expressWs) => {
                     });
                 }
             }if(jsonMessage.type === 'FINISH_TURN'){
-                const songs = await songRepository.getAll();
+                const palabra = await palabraRepository.getAll();
                 if (rooms[roomName]) {
                     rooms[roomName].forEach(client => {
                         if (client.ws !== ws && client.ws.readyState === ws.OPEN) {
                           console.log(ws.OPEN);
-                            client.ws.send(JSON.stringify(songs));
+                            client.ws.send(JSON.stringify(palabra));
                         }
                     });
                 }

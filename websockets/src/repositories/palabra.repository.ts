@@ -19,4 +19,7 @@ export class PalabraRepository {
     async delete(id: number){
         return this.repository.delete(id);
     }
+    async getAll(texto?: string) {
+        return this.repository.find({where: texto ? {texto} : {}});
+    }
 }

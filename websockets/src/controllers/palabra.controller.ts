@@ -63,4 +63,14 @@ export class PalabraController {
             res.status(400).json({ error: error.message });
         }
     }
+
+    public getAll = async (req: Request, res: Response) => {
+        const texto = <string> req.query.genre;
+        try {
+            const palabras: Palabra[] = await this.palabraRepository.getAll(texto);
+            return res.status(200).json(palabras);
+        } catch (error) {
+             res.status(400).json({ error: error.message });
+       }
+    }
 }

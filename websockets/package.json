@@ -1,5 +1,5 @@
 {
-   "name": "songsApi",
+   "name": "juvana",
    "version": "0.0.1",
    "description": "Awesome project developed with TypeORM.",
    "type": "commonjs",
@@ -22,7 +22,8 @@
       "swagger-jsdoc": "^6.2.8",
       "swagger-ui-express": "^5.0.0",
       "typeorm": "0.3.20",
-      "uuid": "^9.0.1"
+      "uuid": "^9.0.1",
+      "ws": "^8.17.0"
    },
    "scripts": {
       "start": "nodemon src/index.ts"

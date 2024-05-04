@@ -9,7 +9,7 @@ dotenv.config();
 
 const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, NODE_ENV } =
   process.env;
-  
+
 export const AppDataSource = new DataSource({
   type: "postgres",
   host: DB_HOST,
@@ -17,9 +17,10 @@ export const AppDataSource = new DataSource({
   username: DB_USERNAME,
   password: DB_PASSWORD,
   database: DB_DATABASE,
-  synchronize: false,
+
+  synchronize: NODE_ENV === "dev" ? false : false,
 //logging logs sql command on the treminal
-  logging:  false,
+  logging: NODE_ENV === "dev" ? false : false,
   entities: [Palabra],
   migrations: [__dirname + "/migration/*.ts"],
   subscribers: [],
