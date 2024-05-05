@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { DataSource } from "typeorm";
 
 import * as dotenv from "dotenv";
-import { Palabra } from "./entity/Palabra.entity";
+import { Palabra } from "./middleware/Palabra.entity";
 
 
 dotenv.config();
