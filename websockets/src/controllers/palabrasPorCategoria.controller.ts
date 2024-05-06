@@ -1,32 +1,36 @@
-
-import { Controller, Post, Body } from "@nestjs/common";
+import { Request, Response } from "express";
 import { PalabrasPorCategoriaResponse } from "../dto/palabrasPorCategoria.dto";
 import { PalabrasPorCategoriaRepository } from "../repositories/palabrasPorCategoria.repository";
-import { Request, Response } from "express";
+import { PalabrasPorCategoria } from "../entity/PalabrasPorCategoria.entity";
+import { v4 as uuidv4 } from 'uuid';
+//ND
+export class PalabrasPorCategoriaController {
+    private palabrasPorCategoriaRepository: PalabrasPorCategoriaRepository = new PalabrasPorCategoriaRepository();
 
-// @Controller('palabrasPorCategoria')
-// export class PalabrasPorCategoriaController {
-//   private palabrasPorCategoriaRepository: PalabrasPorCategoriaRepository = new PalabrasPorCategoriaRepository();
-//   constructor(private readonly repo: PalabrasPorCategoriaRepository) {}
-
-//   @Post()
-//   async associate(@Body() dto: PalabrasPorCategoriaResponse) {
-//     return this.repo.associateWordsToCategory(dto.cate_id, dto.pala_id);
-//   }
-//     // ...otros métodos...
-  
-//     public disassociate = async (req: Request, res: Response) => {
-//       const dto: PalabrasPorCategoriaResponse = req.body;
-//       try {
-//         await this.palabrasPorCategoriaRepository.disassociateWordsFromCategory(dto.cate_id, dto.pala_id);
-//         res.status(200).json({ message: 'Disassociated successfully' });
-//       } catch (error) {
-//         res.status(400).json({ error: error.message });
-//       }
-//     }
-//   }
-  
+    public getById = async (req: Request, res: Response) => {
+        const { id } = req.params;
+        try {
+            const palabrasPorCategoria: PalabrasPorCategoria = await this.palabrasPorCategoriaRepository.findById(Number(id));
+            if (palabrasPorCategoria === null) {
+                res.status(404).json({ error: 'This word doesn\'t exist' });
+            }
+            res.status(200).json({ palabrasPorCategoria });
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    }
 
 
+    public delete = async (req: Request, res: Response) => {
+        const { id } = req.params;
+        try {
+            await this.palabrasPorCategoriaRepository.delete(Number(id));
+            res.status(200).json({ message: 'Deleted' });
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    }
 
 
+    //Ver lista de todas
+}

@@ -8,11 +8,11 @@ export class PalabrasPorCategoria {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Categoria, (categoria) => categoria.palabrasPorCategoria)
+  // @ManyToOne(() => Categoria, (categoria) => categoria.palabrasPorCategoria)
   @JoinColumn({ name: "cate_id" })
   categoria: Categoria;
 
-  @ManyToOne(() => Palabra, (palabra) => palabra.palabrasPorCategoria)
+  // @ManyToOne(() => Palabra, (palabra) => palabra.palabrasPorCategoria)
   @JoinColumn({ name: "pala_id" })
   palabra: Palabra;
 
