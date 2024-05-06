@@ -16,7 +16,7 @@ Router.get(
   );
 
   Router.post(
-    "/save",
+    "/categoria",
     categoriaController.save
   );
 

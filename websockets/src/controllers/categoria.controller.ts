@@ -37,9 +37,6 @@ export class CategoriaController{
     public save = async (req: Request, res: Response) => {
         const body = req.body;
         try {
-            
-            const id = uuidv4();
-            body['id']= id;
             const result: Categoria = await this.categoriaRepository.save(body);
             return res.status(200).json(result);
         } catch (error) {

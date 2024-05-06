@@ -5,6 +5,9 @@ import { Request, Response } from "express";
 import "reflect-metadata";
 import { errorHandler } from "./middleware/errorHandler";
 import { palabraRouter } from "./routes/palabra.routes";
+import { categoriaRouter } from "./routes/categoria.routes";
+import { saladeJuegoControllerRouter } from "./routes/saladeJuego.routes";
+import { palabrasPorCategoriaRouter } from "./routes/palabrasPorCategoria.routes";
 import * as swaggerUi from 'swagger-ui-express';
 import * as swaggerSpec from './swagger'
 const cors = require('cors');
@@ -19,6 +22,8 @@ app.use(cors());
 app.use(express.json());
 app.use(errorHandler);
 app.use("/api", palabraRouter);
+app.use("/categoria", categoriaRouter);
+app.use("/por", palabrasPorCategoriaRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/ws', websocketRouter);
