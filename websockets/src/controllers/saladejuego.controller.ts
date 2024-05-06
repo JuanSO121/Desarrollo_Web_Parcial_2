@@ -74,4 +74,7 @@ export class SaladeJuegoController {
             res.status(400).json({ error: error.message });
         }
     }
+
+
+    //Ver lista de todas
 }
