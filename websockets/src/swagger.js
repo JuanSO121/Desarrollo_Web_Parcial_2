@@ -6,7 +6,7 @@ const options =
     definition: {
       openapi: "3.1.0",
       info: {
-        title: "Song Express Api with swagger",
+        title: "Pinturillo",
         version: "0.1.0",
         description:
           "This is a simple CRUD API application made with Express and documented with Swagger",
@@ -19,10 +19,10 @@ const options =
         },
       },
       paths: {
-        "/song": {
+        "/palabra": {
           "get": {
-            "summary": "Retrieve a song by its title",
-            "tags": ["Song"],
+            "summary": "Retrieve a palabra by its texto",
+            "tags": ["Palabra"],
             "parameters": [
               {
                 "in": "query",

@@ -1,9 +1,10 @@
 import { AppDataSource } from "./data-source";
 import * as dotenv from "dotenv";
+import { Request, Response } from "express";
 
 import "reflect-metadata";
 import { errorHandler } from "./middleware/errorHandler";
-import { songRouter } from "./routes/songs.routes";
+import { palabraRouter } from "./routes/palabra.routes";
 import * as swaggerUi from 'swagger-ui-express';
 import * as swaggerSpec from './swagger'
 const cors = require('cors');
@@ -17,9 +18,14 @@ const websocketRouter = require('../src/routes/socket.routes')(wsInstance);
 app.use(cors());
 app.use(express.json());
 app.use(errorHandler);
-app.use("/api", songRouter);
+app.use("/api", palabraRouter);
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/ws', websocketRouter);
+
+
+
+
 AppDataSource.initialize()
   .then(async () => {
     app.listen(3000, () => {
