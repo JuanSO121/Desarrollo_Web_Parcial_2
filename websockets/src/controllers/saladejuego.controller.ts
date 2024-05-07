@@ -2,12 +2,12 @@ import { Request, Response } from "express";
 import { SaladeJuegoResponse } from "../dto/saladeJuego.dto";
 import { SaladeJuegoRepository } from "../repositories/saladeJuego.repository";
 import { SaladeJuego } from "../entity/SaladeJuego.entity";
-import { v4 as uuidv4 } from 'uuid';
 
 import { Palabra } from "../entity/Palabra.entity";
 import { PalabrasPorCategoria } from "../entity/PalabrasPorCategoria.entity";
-import { getRepository } from "typeorm";
+// import { getRepository } from "typeorm";
 //ND
+
 export class SaladeJuegoController {
     private saladeJuegoRepository: SaladeJuegoRepository = new SaladeJuegoRepository();
 
@@ -79,8 +79,16 @@ export class SaladeJuegoController {
         }
     }
 
+    public getAll = async (req: Request, res: Response) => {
+      const id = <string> req.query.id;
+      try {
+          const saladeJuego: SaladeJuego[] = await this.saladeJuegoRepository.getAll(Number(id));
+          return res.status(200).json(saladeJuego);
+      } catch (error) {
+           res.status(400).json({ error: error.message });
+     }
+  }
 
-    //Ver lista de todas
 }
 
 //VS

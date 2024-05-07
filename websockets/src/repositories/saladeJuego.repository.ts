@@ -23,4 +23,8 @@ export class SaladeJuegoRepository {
     async delete(id: number){
         return this.repository.delete(id);
     }
+
+    async getAll(id?: number) {
+        return this.repository.find({where: id ? {id} : {}});
+    }
 }

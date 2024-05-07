@@ -2,7 +2,7 @@ import { Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Palabra } from "./Palabra.entity";
 import { Categoria } from "./Categoria.entity";
 
-@Entity({ name: "palabras_por_categoria" })
+@Entity({ name: "palabrasporcategoria" })
 export class PalabrasPorCategoria {
   @PrimaryGeneratedColumn()
   id: number;

@@ -1,29 +1,33 @@
-import { SongRepository } from "../repositories/song.repository";
+import { SaladeJuegoRepository } from "../repositories/saladeJuego.repository";
 
 const express = require('express');
 const router = express.Router();
 module.exports = (expressWs) => {
     
-    const songRepository = new SongRepository();
+    const saladeJuegoRepository = new SaladeJuegoRepository();
     expressWs.applyTo(router);
 
     const rooms = {};
 
-    router.ws('/room/:roomName', (ws, req) => {
+    router.ws('/room/:roomName', async (ws, req) => {
         const roomName = req.params.roomName;
         const userName = req.headers.username;
-        if (!rooms[roomName]) {
-            rooms[roomName] = new Set();
-        }
-        rooms[roomName].add({ws, userName});
-        //Notificar a todos que me uní
-        if (rooms[roomName]) {
-            rooms[roomName].forEach(client => {
-                if (client.ws !== ws && client.ws.readyState === ws.OPEN) {
-                  console.log(ws.OPEN);
-                    client.ws.send(`${userName} has joined`);
-                }
-            });
+    
+        // Verificar si la sala existe en la base de datos
+        try {
+            const sala = await saladeJuegoRepository.findByNombre(roomName);
+            if (!sala) {
+                // Si la sala no existe, devolver un mensaje de error al cliente
+                ws.send('La sala especificada no existe');
+                ws.close();
+                return;
+            }
+        } catch (error) {
+            // Manejar errores de base de datos
+            console.error('Error al buscar la sala en la base de datos:', error);
+            ws.send('Error al buscar la sala en la base de datos');
+            ws.close();
+            return;
         }
         ws.on('message', async function(msg) {
             const jsonMessage: {type: string, data: any} = JSON.parse(msg);
@@ -37,12 +41,12 @@ module.exports = (expressWs) => {
                     });
                 }
             }if(jsonMessage.type === 'FINISH_TURN'){
-                const songs = await songRepository.getAll();
+                const salas = await saladeJuegoRepository.getAll();
                 if (rooms[roomName]) {
                     rooms[roomName].forEach(client => {
                         if (client.ws !== ws && client.ws.readyState === ws.OPEN) {
                           console.log(ws.OPEN);
-                            client.ws.send(JSON.stringify(songs));
+                            client.ws.send(JSON.stringify(salas));
                         }
                     });
                 }

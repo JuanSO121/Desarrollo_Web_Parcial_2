@@ -74,7 +74,7 @@ export class PalabraController {
        }
     }
 
-    
+    // arreglar estructura =>
     public async associateToCategoria(req: Request<{ palabraId: string; categoriaId: string }>, res: Response) {
         const { palabraId, categoriaId } = req.params;
     

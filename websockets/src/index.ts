@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(errorHandler);
 app.use("/api", palabraRouter);
 app.use("/categoria", categoriaRouter);
-app.use("/room", categoriaRouter);
+app.use("/room", saladeJuegoRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/ws', websocketRouter);
@@ -49,9 +49,9 @@ AppDataSource.initialize()
 //const app = express();
 //const PORT = 3000;
 
-app.use(express.json());
-app.use('/sala-de-juego', saladeJuegoControllerRouter);
+// app.use(express.json());
+// // app.use('/sala-de-juego', saladeJuegoControllerRouter);
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Servidor corriendo en el puerto ${PORT}`);
+// });

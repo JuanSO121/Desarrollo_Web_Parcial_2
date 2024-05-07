@@ -20,6 +20,11 @@ Router.get(
     saladejuegoController.getById
   );
 
+  Router.get(
+    "/saladejuego/",
+    saladejuegoController.getAll
+  );
+  
   Router.post(
     "/save",
     saladejuegoController.save
@@ -34,6 +39,7 @@ Router.get(
     "/saladejuego/:id",
     saladejuegoController.delete
   )
+  
 
   // Router.get(
   //   '/turno',
