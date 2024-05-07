@@ -1,6 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany  } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm";
 import { PalabrasPorCategoria } from "./PalabrasPorCategoria.entity";
-//ND
+
 @Entity({ name: "categoria" })
 export class Categoria extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -9,6 +9,6 @@ export class Categoria extends BaseEntity {
   @Column({ nullable: false })
   nombre: string;
 
-  @OneToMany(() => PalabrasPorCategoria, palabraPorCategoria => palabraPorCategoria.categoria)
+  @OneToMany(() => PalabrasPorCategoria, palabrasPorCategoria => palabrasPorCategoria.categoria)
   palabrasPorCategoria: PalabrasPorCategoria[];
 }

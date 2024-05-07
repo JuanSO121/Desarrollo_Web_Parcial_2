@@ -5,7 +5,7 @@ import * as dotenv from "dotenv";
 import { Palabra } from "./entity/Palabra.entity";
 import { Categoria } from "./entity/Categoria.entity";
 import { PalabrasPorCategoria } from "./entity/PalabrasPorCategoria.entity";
-
+import { SaladeJuego } from "./entity/SaladeJuego.entity";
 dotenv.config();
 
 const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_DATABASE, NODE_ENV } =
