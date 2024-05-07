@@ -35,12 +35,12 @@ Router.get(
     saladejuegoController.delete
   )
 
-  Router.get(
-    '/turno',
-     generarTurnoDeJuego
-    )
+  // Router.get(
+  //   '/turno',
+  //    generarTurnoDeJuego
+  //   )
     
-    export { Router as saladeJuegoRouter };
+export { Router as saladeJuegoRouter };
 
 
   //VS
@@ -48,11 +48,11 @@ Router.get(
 //  import express from 'express';
 //import { generarTurnoDeJuego } from '../controllers/SalaDeJuegoController';
 
-const router = express.Router();
+// const router = express.Router();
 
 
 
-export default router;
+// export default router;
 
 
 
@@ -60,8 +60,8 @@ export default router;
 
 
 
-router.get('/turno', generarTurnoDeJuego);
-router.put('/turno/:id/finalizar', finalizarTurnoDeJuego);
+// router.get('/turno', generarTurnoDeJuego);
+// router.put('/turno/:id/finalizar', finalizarTurnoDeJuego);
 
 
 
@@ -70,9 +70,9 @@ router.put('/turno/:id/finalizar', finalizarTurnoDeJuego);
 
 //const router = express.Router();
 
-router.get('/turno', generarTurnoDeJuego);
-router.put('/turno/:id/finalizar', finalizarTurnoDeJuego);
-router.post('/adivinar/:id', adivinarPalabra);
+// router.get('/turno', generarTurnoDeJuego);
+// router.put('/turno/:id/finalizar', finalizarTurnoDeJuego);
+// router.post('/adivinar/:id', adivinarPalabra);
 
-export default router;
+// export default router;
 

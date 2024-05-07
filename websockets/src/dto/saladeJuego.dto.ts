@@ -4,4 +4,3 @@ export class SaladeJuegoResponse{
     estado: string;
   
 }
-//ND

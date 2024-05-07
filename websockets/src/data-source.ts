@@ -22,7 +22,7 @@ export const AppDataSource = new DataSource({
   synchronize: NODE_ENV === "dev" ? false : false,
 //logging logs sql command on the treminal
   logging: NODE_ENV === "dev" ? false : false,
-  entities: [Palabra,Categoria,PalabrasPorCategoria],
+  entities: [Palabra,Categoria,PalabrasPorCategoria,SaladeJuego],
   
   migrations: [__dirname + "/migration/*.ts"],
   subscribers: [],

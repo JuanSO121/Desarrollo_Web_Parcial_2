@@ -6,8 +6,8 @@ import "reflect-metadata";
 import { errorHandler } from "./middleware/errorHandler";
 import { palabraRouter } from "./routes/palabra.routes";
 import { categoriaRouter } from "./routes/categoria.routes";
-import { saladeJuegoControllerRouter } from "./routes/saladeJuego.routes";
-import { palabraPorCategoriaRouter } from "./routes/palabrasPorCategoria.routes";
+import { saladeJuegoRouter } from "./routes/saladeJuego.routes";
+// import { palabraPorCategoriaRouter } from "./routes/palabrasPorCategoria.routes";
 import * as swaggerUi from 'swagger-ui-express';
 import * as swaggerSpec from './swagger'
 const cors = require('cors');
@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(errorHandler);
 app.use("/api", palabraRouter);
 app.use("/categoria", categoriaRouter);
-app.use("/por", palabraPorCategoriaRouter);
+app.use("/room", categoriaRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/ws', websocketRouter);
