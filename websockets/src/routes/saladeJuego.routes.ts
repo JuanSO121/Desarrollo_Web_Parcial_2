@@ -39,7 +39,8 @@ Router.get(
     '/turno',
      generarTurnoDeJuego
     )
-  export { Router as saladeJuegoControllerRouter };
+    
+    export { Router as saladeJuegoRouter };
 
 
   //VS
