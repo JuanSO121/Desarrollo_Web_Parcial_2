@@ -55,10 +55,23 @@ export default router;
 
 
 
-import { generarTurnoDeJuego, finalizarTurnoDeJuego }  from "../controllers/saladejuego.controller";
+//import { generarTurnoDeJuego, finalizarTurnoDeJuego }  from "../controllers/saladejuego.controller";
 
 
 
 router.get('/turno', generarTurnoDeJuego);
 router.put('/turno/:id/finalizar', finalizarTurnoDeJuego);
+
+
+
+//import { generarTurnoDeJuego, finalizarTurnoDeJuego } from '../controllers/SalaDeJuegoController';
+//import { adivinarPalabra } from '../controllers/adivinarPalabra.controller';
+
+//const router = express.Router();
+
+router.get('/turno', generarTurnoDeJuego);
+router.put('/turno/:id/finalizar', finalizarTurnoDeJuego);
+router.post('/adivinar/:id', adivinarPalabra);
+
+export default router;
 
