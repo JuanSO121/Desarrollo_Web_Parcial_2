@@ -7,7 +7,7 @@ import { errorHandler } from "./middleware/errorHandler";
 import { palabraRouter } from "./routes/palabra.routes";
 import { categoriaRouter } from "./routes/categoria.routes";
 import { saladeJuegoControllerRouter } from "./routes/saladeJuego.routes";
-import { palabrasPorCategoriaRouter } from "./routes/palabrasPorCategoria.routes";
+import { palabraPorCategoriaRouter } from "./routes/palabrasPorCategoria.routes";
 import * as swaggerUi from 'swagger-ui-express';
 import * as swaggerSpec from './swagger'
 const cors = require('cors');
@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(errorHandler);
 app.use("/api", palabraRouter);
 app.use("/categoria", categoriaRouter);
-app.use("/por", palabrasPorCategoriaRouter);
+app.use("/por", palabraPorCategoriaRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/ws', websocketRouter);
@@ -39,3 +39,19 @@ AppDataSource.initialize()
     console.log("Data Source has been initialized!");
   })
   .catch((error) => console.log(error));
+
+
+  //VS
+
+  //import * as express from "express";
+//import salaDeJuegoRoutes from './routes/SalaDeJuegoRoutes';
+
+//const app = express();
+//const PORT = 3000;
+
+app.use(express.json());
+app.use('/sala-de-juego', saladeJuegoControllerRouter);
+
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
+});

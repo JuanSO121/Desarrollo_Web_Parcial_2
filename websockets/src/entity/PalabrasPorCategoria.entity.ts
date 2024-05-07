@@ -1,4 +1,4 @@
-import { Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn, Column } from "typeorm";
 import { Categoria } from "./Categoria.entity";
 import { Palabra } from "./Palabra.entity";
 
@@ -8,11 +8,17 @@ export class PalabrasPorCategoria {
   @PrimaryGeneratedColumn()
   id: number;
 
-  // @ManyToOne(() => Categoria, (categoria) => categoria.palabrasPorCategoria)
+  @Column()
+  cate_id: number;
+
+  @Column()
+  pala_id: number;
+
+  @ManyToOne(() => Categoria)
   @JoinColumn({ name: "cate_id" })
   categoria: Categoria;
 
-  // @ManyToOne(() => Palabra, (palabra) => palabra.palabrasPorCategoria)
+  @ManyToOne(() => Palabra)
   @JoinColumn({ name: "pala_id" })
   palabra: Palabra;
 

@@ -31,6 +31,31 @@ export class PalabrasPorCategoriaController {
         }
     }
 
+    public create = async (req: Request, res: Response) => {
+        const { cate_id, pala_id } = req.body;
+
+        try {
+            // Verificar si la categoría y la palabra existen
+            const categoria = await Categoria.findOne(cate_id);
+            const palabra = await Palabra.findOne(pala_id);
+
+            if (!categoria || !palabra) {
+                return res.status(404).json({ error: 'La categoría o la palabra no existen' });
+            }
+
+            // Crear la asociación
+            const nuevaAsociacion = new PalabrasPorCategoria();
+            nuevaAsociacion.categoria = categoria;
+            nuevaAsociacion.palabra = palabra;
+
+            await nuevaAsociacion.save();
+
+            res.status(201).json({ message: 'Asociación creada correctamente' });
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    }
+
 
     //Ver lista de todas
 }

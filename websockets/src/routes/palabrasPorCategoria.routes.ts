@@ -1,37 +1,22 @@
 
 import * as express from "express";
-import { PalabraController } from "../controllers/palabra.controller";
+import { PalabrasPorCategoriaController } from "../controllers/palabrasPorCategoria.controller";
 //ND
 const Router = express.Router();
-const palabraController = new PalabraController();
-
-Router.get(
-    "/palabra",
-    palabraController.getByTexto
-  );
+const palabrasPorCategoriaController = new PalabrasPorCategoriaController();
 
   Router.get(
-    "/palabra/:id",
-    palabraController.getById
+    "/palabraPorCategoria/:id",
+    palabrasPorCategoriaController.getById
   );
 
-  Router.post(
-    "/save",
-    palabraController.save
-  );
-
-  Router.put(
-    "/palabra",
-    palabraController.update
-  )
 
   Router.delete(
-    "/palabra/:id",
-    palabraController.delete
+    "/palabraPorCategoria/:id",
+    palabrasPorCategoriaController.delete
   )
 
-  Router.get(
-    "/palabras",
-    palabraController.getAll
-  );
-  export { Router as palabraRouter };
+  Router.post("/palabrasPorCategoria", palabrasPorCategoriaController.create);
+
+
+  export { Router as palabraPorCategoriaRouter };

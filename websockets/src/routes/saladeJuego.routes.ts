@@ -34,4 +34,31 @@ Router.get(
     "/saladejuego/:id",
     saladejuegoController.delete
   )
+
+  Router.get(
+    '/turno',
+     generarTurnoDeJuego
+    )
   export { Router as saladeJuegoControllerRouter };
+
+
+  //VS
+
+//  import express from 'express';
+//import { generarTurnoDeJuego } from '../controllers/SalaDeJuegoController';
+
+const router = express.Router();
+
+
+
+export default router;
+
+
+
+import { generarTurnoDeJuego, finalizarTurnoDeJuego }  from "../controllers/saladejuego.controller";
+
+
+
+router.get('/turno', generarTurnoDeJuego);
+router.put('/turno/:id/finalizar', finalizarTurnoDeJuego);
+
