@@ -3,4 +3,3 @@ export class CategoriaResponse{
     nombre: string;
   
 }
-//ND

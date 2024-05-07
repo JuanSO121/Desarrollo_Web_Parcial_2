@@ -73,4 +73,31 @@ export class PalabraController {
              res.status(400).json({ error: error.message });
        }
     }
+
+    
+    public async associateToCategoria(req: Request<{ palabraId: string; categoriaId: string }>, res: Response) {
+        const { palabraId, categoriaId } = req.params;
+    
+        try {
+            await this.palabraRepository.associateToCategoria(Number(palabraId), Number(categoriaId));
+            res.status(200).json({ message: "Palabra associated to Categoria successfully" });
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    }
+    
+    public async disassociateFromCategoria(req: Request<{ palabraId: string; categoriaId: string }>, res: Response) {
+        const { palabraId, categoriaId } = req.params;
+    
+        try {
+            await this.palabraRepository.disassociateFromCategoria(Number(palabraId), Number(categoriaId));
+            res.status(200).json({ message: "Palabra disassociated from Categoria successfully" });
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    }
+    
+    
+
+    
 }

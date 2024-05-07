@@ -3,5 +3,3 @@ export class PalabraResponse{
     texto: string;
   
 }
-
-//jjso

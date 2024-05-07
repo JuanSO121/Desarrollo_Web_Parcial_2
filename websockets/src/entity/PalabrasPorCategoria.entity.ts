@@ -1,19 +1,15 @@
-import { Entity, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from "typeorm";
-import { Categoria } from "./Categoria.entity";
+import { Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Palabra } from "./Palabra.entity";
+import { Categoria } from "./Categoria.entity";
 
-@Entity({ name: "PalabrasPorCategoria" })
+@Entity({ name: "palabras_por_categoria" })
 export class PalabrasPorCategoria {
-
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Categoria, categoria => categoria.palabrasPorCategoria)
-  @JoinColumn({ name: "cate_id" })
-  categoria: Categoria;
-
   @ManyToOne(() => Palabra, palabra => palabra.palabrasPorCategoria)
-  @JoinColumn({ name: "pala_id" })
   palabra: Palabra;
 
+  @ManyToOne(() => Categoria, categoria => categoria.palabrasPorCategoria)
+  categoria: Categoria;
 }
