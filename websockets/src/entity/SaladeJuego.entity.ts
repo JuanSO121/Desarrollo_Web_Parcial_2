@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToOne, JoinColumn } from "typeorm";
+import { Categoria } from "./Categoria.entity";
 
 @Entity({ name: "saladejuego" })
 export class SaladeJuego extends BaseEntity {
@@ -10,4 +11,8 @@ export class SaladeJuego extends BaseEntity {
 
   @Column({ nullable: false })
   estado: string;
+
+  @ManyToOne(() => Categoria, categoria => categoria.salasDeJuego)
+  @JoinColumn({ name: "cate_id" })
+  cate_id: Categoria;
 }

@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm";
 import { PalabrasPorCategoria } from "./PalabrasPorCategoria.entity";
 
-@Entity({ name: "palabra" })
+@Entity({ name: "Palabra" })
 export class Palabra extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
