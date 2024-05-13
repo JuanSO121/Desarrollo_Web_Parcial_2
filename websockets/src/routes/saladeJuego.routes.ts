@@ -3,21 +3,6 @@ import { SaladeJuegoController } from "../controllers/saladejuego.controller";
 
 const Router = express.Router();
 const saladejuegoController = new SaladeJuegoController();
-
-// Router.get(
-//     "/saladejuego/nombre",
-//     saladejuegoController.getAllByNombre
-// );
-
-// Router.get(
-//     "/saladejuego/:id",
-//     saladejuegoController.getById
-// );
-
-// Router.get(
-//     "/saladejuego/getAll/",
-//     saladejuegoController.getAll
-// );
   
 Router.post(
     "/saladejuego",

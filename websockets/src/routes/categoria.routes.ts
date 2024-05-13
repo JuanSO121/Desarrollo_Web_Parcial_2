@@ -29,4 +29,16 @@ Router.get(
     "/categoria/:id",
     categoriaController.delete
   )
+
+  
+  Router.post(
+    "/categoria/asociar-palabra",
+    categoriaController.saveAsociacionPalabraCategoria
+  );
+
+  Router.post(
+    "/categoria/desvincular-palabra",
+    categoriaController.desvincularPalabraCategoria
+  );
+
   export { Router as categoriaRouter };

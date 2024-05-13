@@ -9,6 +9,6 @@ export class Palabra extends BaseEntity {
   @Column({ nullable: false })
   texto: string;
 
-  @OneToMany(() => PalabrasPorCategoria, palabrasPorCategoria => palabrasPorCategoria.palabra)
+  @OneToMany(() => PalabrasPorCategoria, palabrasPorCategoria => palabrasPorCategoria.pala_id)
   palabrasPorCategoria: PalabrasPorCategoria[];
 }

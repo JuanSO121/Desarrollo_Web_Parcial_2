@@ -36,16 +36,24 @@ export class SaladeJuegoController{
         const body = req.body;
         try {
             const id = body.id;
-            let salaToUpdate: SaladeJuego = await this.saladeJuegoRepository.findById(Number(id));
-            salaToUpdate = {
-                ...body
-            } 
+            let salaToUpdate: SaladeJuego | undefined = await this.saladeJuegoRepository.findById(Number(id));
+            
+            if (!salaToUpdate) {
+                return res.status(404).json({ error: 'Sala no encontrada' });
+            }
+            
+            salaToUpdate.nombre = body.nombre;
+            salaToUpdate.estado = body.estado;
+            salaToUpdate.cate_id = body.cate_id; 
+
             const result: SaladeJuego = await this.saladeJuegoRepository.save(salaToUpdate);
+            
             return res.status(200).json(result);
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
     }
+    
 
     public delete = async (req: Request, res: Response) => {
         const {id} = req.params;
@@ -80,8 +88,5 @@ export class SaladeJuegoController{
              res.status(400).json({ error: error.message });
         }
     };
-    
-
-
 
 }

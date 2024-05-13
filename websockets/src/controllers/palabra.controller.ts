@@ -33,7 +33,13 @@ export class PalabraController {
 
     public save = async (req: Request, res: Response) => {
         const body = req.body;
+        const texto = body.texto;
         try {
+            const existingPalabra = await this.palabraRepository.findByTexto(texto);
+            if (existingPalabra) {
+                return res.status(400).json({ error: 'Ya existe esa Palabra' });
+            }
+    
             const result: Palabra = await this.palabraRepository.save(body);
             return res.status(200).json(result);
         } catch (error) {
@@ -41,13 +47,22 @@ export class PalabraController {
         }
     }
     
+    
     public update = async (req: Request, res: Response) => {
         const body = req.body;
         try {
             const id = body.id;
-            let palabraToUpdate: Palabra = await this.palabraRepository.findById(id);
-            palabraToUpdate = { ...body };
+            let palabraToUpdate: Palabra | undefined = await this.palabraRepository.findById(Number(id));
+            
+            if (!palabraToUpdate) {
+                return res.status(404).json({ error: 'palabra no encontrada' });
+            }
+            
+            palabraToUpdate.texto = body.texto;
+
+
             const result: Palabra = await this.palabraRepository.save(palabraToUpdate);
+            
             return res.status(200).json(result);
         } catch (error) {
             res.status(400).json({ error: error.message });
@@ -73,31 +88,4 @@ export class PalabraController {
              res.status(400).json({ error: error.message });
        }
     }
-
-    // arreglar estructura =>
-    public async associateToCategoria(req: Request<{ palabraId: string; categoriaId: string }>, res: Response) {
-        const { palabraId, categoriaId } = req.params;
-    
-        try {
-            await this.palabraRepository.associateToCategoria(Number(palabraId), Number(categoriaId));
-            res.status(200).json({ message: "Palabra associated to Categoria successfully" });
-        } catch (error) {
-            res.status(400).json({ error: error.message });
-        }
-    }
-    
-    public async disassociateFromCategoria(req: Request<{ palabraId: string; categoriaId: string }>, res: Response) {
-        const { palabraId, categoriaId } = req.params;
-    
-        try {
-            await this.palabraRepository.disassociateFromCategoria(Number(palabraId), Number(categoriaId));
-            res.status(200).json({ message: "Palabra disassociated from Categoria successfully" });
-        } catch (error) {
-            res.status(400).json({ error: error.message });
-        }
-    }
-    
-    
-
-    
 }

@@ -19,4 +19,9 @@ export class CategoriaRepository {
     async delete(id: number){
         return this.repository.delete(id);
     }
+
+    
+
+    
+    
 }

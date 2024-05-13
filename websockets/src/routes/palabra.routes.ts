@@ -35,7 +35,4 @@ Router.get(
     palabraController.getAll
   );
 
-  Router.post("/associate", palabraController.associateToCategoria);
-  Router.post("/disassociate", palabraController.disassociateFromCategoria);
-
   export { Router as palabraRouter };
