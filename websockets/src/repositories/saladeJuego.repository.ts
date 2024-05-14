@@ -46,16 +46,18 @@ export class SaladeJuegoRepository {
     }
 
     async findBySalaId(salaId: number) {
-        // Realizar una consulta personalizada para obtener las palabras asociadas a la sala de juego
-        const query = this.repository.createQueryBuilder("saladejuego")
-            .leftJoinAndSelect("saladejuego.cate_id", "categoria")
-            .leftJoinAndSelect("categoria.palabrasPorCategoria", "palabrasPorCategoria")
-            .leftJoinAndSelect("palabrasPorCategoria.palabra", "palabra")
-            .where("saladejuego.id = :salaId", { salaId })
-            .getOne();
-
-        return query;
+        // Buscar la sala de juego
+        const sala = await this.repository.findOne({ where: { id: salaId }, relations: ["cate_id"] });
+    
+        // Si la sala de juego no existe, devolver null
+        if (!sala) {
+            return null;
+        }
+    
+        // Si la sala de juego existe, devolver la sala de juego con su categoría asociada
+        return sala;
     }
+    
 
     
     

@@ -34,4 +34,5 @@ Router.get(
     saladejuegoController.getPalabrasBySalaId
 );
 
+
 export { Router as saladeJuegoRouter };
