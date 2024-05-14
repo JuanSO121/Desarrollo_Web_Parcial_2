@@ -19,7 +19,7 @@ export class SaladeJuegoRepository {
     async save(saladeJuego: SaladeJuego) {
         return this.repository.save(saladeJuego);
     }
-   
+
     async delete(id: number) {
         return this.repository.delete(id);
     }
