@@ -94,22 +94,26 @@ export class SaladeJuegoController{
 
     public getPalabrasBySalaId = async (req: Request, res: Response) => {
         const { salaId } = req.params;
-
+    
         try {
             // Buscar la sala de juego
             const sala: SaladeJuego = await this.saladeJuegoRepository.findById(Number(salaId));
             if (!sala) {
                 return res.status(404).json({ error: "Sala de juego no encontrada" });
             }
-
+    
             // Buscar todas las palabras de la categoría asociada a la sala de juego
             const palabras = await this.palabrasPorCategoriaRepository.findByCategory(sala.cate_id.id);
-
+    
+            console.log("Palabras asociadas a la categoría:", palabras); // Registro de depuración
+    
             return res.status(200).json(palabras);
         } catch (error) {
+            console.error("Error al obtener palabras por categoría:", error); // Registro de depuración
             return res.status(500).json({ error: "Error interno del servidor" });
         }
     };
+    
     
 
 }
