@@ -1,14 +1,17 @@
 import { Request, Response } from "express";
 import { SaladeJuegoResponse } from "../dto/saladeJuego.dto";
 import { SaladeJuegoRepository } from "../repositories/saladeJuego.repository";
+import { PalabrasPorCategoriaRepository } from "../repositories/palabrasPorCategoria.repository";
 import { SaladeJuego } from "../entity/SaladeJuego.entity";
 import { Categoria } from "../entity/Categoria.entity";
 
-import { v4 as uuidv4 } from 'uuid';
+import { PalabrasPorCategoria } from "../entity/PalabrasPorCategoria.entity";
+
 
 export class SaladeJuegoController{
     
     private saladeJuegoRepository: SaladeJuegoRepository = new SaladeJuegoRepository();
+    private palabrasPorCategoriaRepository: PalabrasPorCategoriaRepository = new PalabrasPorCategoriaRepository();
     
 
 
@@ -86,6 +89,22 @@ export class SaladeJuegoController{
             return res.status(200).json(salasDeJuego);
         } catch (error) {
              res.status(400).json({ error: error.message });
+        }
+    };
+
+    public getPalabrasBySalaId = async (req: Request, res: Response) => {
+        const { salaId } = req.params;
+
+        try {
+            const palabras = await this.saladeJuegoRepository.findBySalaId(Number(salaId));
+
+            if (!palabras) {
+                return res.status(404).json({ error: "No se encontraron palabras para la sala de juego especificada" });
+            }
+
+            return res.status(200).json(palabras);
+        } catch (error) {
+            return res.status(500).json({ error: "Error interno del servidor" });
         }
     };
 

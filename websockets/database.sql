@@ -1,51 +1,43 @@
--- public.palabra definition
 
--- Drop table
-
--- DROP TABLE public.palabra;
-
-CREATE TABLE public.palabra (
+CREATE TABLE public.Palabra (
 	id serial PRIMARY KEY,
-	texto varchar(250) NOT NULL,
+	texto varchar(250) NOT NULL
 	
 );
 
 
--- public.categoria definition
-
--- Drop table
-
--- DROP TABLE public.categoria;
-
-CREATE TABLE public.categoria (
+CREATE TABLE public.Categoria (
 	id serial  PRIMARY KEY,
-	nombre varchar(250) NOT NULL,
+	nombre varchar(250) NOT NULL
 	
 );
-
--- public.categoria definition
-
--- Drop table
-
--- DROP TABLE public.categoria;
 
 CREATE TABLE public.PalabrasPorCategoria(
-
-	cate_id INTERGER REFERENCES categoria(id),
-	pala_id INTERGER REFERENCES palabra(id)
-
+	--id serial NOT NULL,
+	cate_id INTEGER REFERENCES Categoria(id),
+	pala_id INTEGER REFERENCES Palabra(id),
+	PRIMARY KEY (pala_id, cate_id)
+	
 );
 
--- public.sala definition
-
--- Drop table
-
--- DROP TABLE public.sala;
 
 CREATE TABLE public.SaladeJuego(
 	id serial  PRIMARY KEY,
 	nombre varchar(225) NOT NULL,
     estado varchar(225) NOT NULL,
-	cate_id INTERGER REFERENCES categoria(id)
+	cate_id INTEGER REFERENCES Categoria(id)
 
 );
+
+CREATE TABLE public.songs (
+	id uuid NOT NULL,
+	title varchar(255) NOT NULL,
+	artist varchar(255) NOT NULL,
+	album varchar(255) NOT NULL,
+	"year" int4 NOT NULL,
+	genre varchar(255) NOT NULL,
+	duration interval NULL,
+	CONSTRAINT songs_pkey PRIMARY KEY (id)
+);
+
+

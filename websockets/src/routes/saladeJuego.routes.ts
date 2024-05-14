@@ -29,4 +29,9 @@ Router.get(
     saladejuegoController.getByState
 );
 
+Router.get(
+    "/saladejuego/:salaId/palabras",
+    saladejuegoController.getPalabrasBySalaId
+);
+
 export { Router as saladeJuegoRouter };

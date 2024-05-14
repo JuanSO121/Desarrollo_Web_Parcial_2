@@ -44,5 +44,19 @@ export class SaladeJuegoRepository {
     async findByState(estado: string) {
         return this.repository.find({ where: { estado } });
     }
+
+    async findBySalaId(salaId: number) {
+        // Realizar una consulta personalizada para obtener las palabras asociadas a la sala de juego
+        const query = this.repository.createQueryBuilder("saladejuego")
+            .leftJoinAndSelect("saladejuego.cate_id", "categoria")
+            .leftJoinAndSelect("categoria.palabrasPorCategoria", "palabrasPorCategoria")
+            .leftJoinAndSelect("palabrasPorCategoria.palabra", "palabra")
+            .where("saladejuego.id = :salaId", { salaId })
+            .getOne();
+
+        return query;
+    }
+
+    
     
 }
