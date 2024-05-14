@@ -2,8 +2,8 @@ import { SaladeJuegoRepository } from "../repositories/saladeJuego.repository";
 
 const express = require('express');
 const router = express.Router();
+
 module.exports = (expressWs) => {
-    
     const saladeJuegoRepository = new SaladeJuegoRepository();
     expressWs.applyTo(router);
 
@@ -12,7 +12,8 @@ module.exports = (expressWs) => {
     router.ws('/room/:roomName', async (ws, req) => {
         const roomName = req.params.roomName;
         const userName = req.headers.username;
-    
+        const avatar = req.headers.avatar; // Obtener el avatar del encabezado
+
         // Verificar si la sala existe en la base de datos
         try {
             const sala = await saladeJuegoRepository.findByNombre(roomName);
@@ -29,30 +30,46 @@ module.exports = (expressWs) => {
             ws.close();
             return;
         }
+
+        // Agregar el jugador con su nombre y avatar a la sala
+        if (!rooms[roomName]) {
+            rooms[roomName] = new Set();
+        }
+        rooms[roomName].add({ ws, userName, avatar });
+
+        // Notificar a todos que el jugador se unió
+        if (rooms[roomName]) {
+            rooms[roomName].forEach(client => {
+                if (client.ws !== ws && client.ws.readyState === ws.OPEN) {
+                    client.ws.send(`${userName} has joined`);
+                }
+            });
+        }
+
         ws.on('message', async function(msg) {
-            const jsonMessage: {type: string, data: any} = JSON.parse(msg);
-            if(jsonMessage.type === 'SEND_MESSAGE'){
+            const jsonMessage: { type: string, data: any } = JSON.parse(msg);
+            if (jsonMessage.type === 'SEND_MESSAGE') {
                 if (rooms[roomName]) {
                     rooms[roomName].forEach(client => {
                         if (client.ws !== ws && client.ws.readyState === ws.OPEN) {
-                          console.log(ws.OPEN);
                             client.ws.send(`${userName} Says: ${jsonMessage.data}`);
                         }
                     });
                 }
-            }if(jsonMessage.type === 'FINISH_TURN'){
+            }
+            if (jsonMessage.type === 'FINISH_TURN') {
                 const salas = await saladeJuegoRepository.getAll();
                 if (rooms[roomName]) {
                     rooms[roomName].forEach(client => {
                         if (client.ws !== ws && client.ws.readyState === ws.OPEN) {
-                          console.log(ws.OPEN);
                             client.ws.send(JSON.stringify(salas));
                         }
                     });
                 }
             }
-            
+
         });
+        
         ws.on('close', function() {
             rooms[roomName].delete(ws);
             if (rooms[roomName].size === 0) {
