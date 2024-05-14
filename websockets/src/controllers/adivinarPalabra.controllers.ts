@@ -8,6 +8,9 @@ import  {SaladeJuego} from '../entity/SaladeJuego.entity';
 //Crea una solicitud POST a http://localhost:3000/juego/iniciar/1 (reemplaza 1 con el ID de la sala correcto) para iniciar un juego.
 
 
+//    Crea una solicitud POST a http://localhost:3000/juego/iniciar/1 para iniciar un juego con ID de sala igual a 1.
+//Crea una solicitud POST a http://localhost:3000/juego/procesar-letra/A para procesar la letra "A".
+//Crea una solicitud POST a http://localhost:3000/juego/pasar-turno para pasar el turno.
 export class JuegoAdivinarPalabra {
   private palabraActual: string = '';
   //private palabraActualDivs: HTMLDivElement[] = [];
