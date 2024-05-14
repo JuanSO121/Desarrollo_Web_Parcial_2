@@ -39,7 +39,7 @@ export class SaladeJuegoController{
         const body = req.body;
         try {
             const id = body.id;
-            let salaToUpdate: SaladeJuego | undefined = await this.saladeJuegoRepository.findById(Number(id));
+            let salaToUpdate: SaladeJuego | undefined = await this.saladeJuegoRepository.findOneById(Number(id));
             
             if (!salaToUpdate) {
                 return res.status(404).json({ error: 'Sala no encontrada' });

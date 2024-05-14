@@ -8,9 +8,9 @@ export class SaladeJuegoRepository {
         return this.repository.findOne({ where: { nombre } });
     }
 
-    // async findById(id: number) {
-    //     return this.repository.findOne({ where: { id } });
-    // }
+    async findOneById(id: number) {
+        return this.repository.findOne({ where: { id } });
+    }
     async findById(id: number) {
         return this.repository.findOne({ where: { id }, relations: ["cate_id"] });
     }
