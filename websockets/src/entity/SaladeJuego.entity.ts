@@ -15,4 +15,6 @@ export class SaladeJuego extends BaseEntity {
   @ManyToOne(() => Categoria, categoria => categoria.salasDeJuego)
   @JoinColumn({ name: "cate_id" })
   cate_id: Categoria;
+
+  
 }
